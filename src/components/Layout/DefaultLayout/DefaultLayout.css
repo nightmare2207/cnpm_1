@@ -1,0 +1,11 @@
+.container {
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.container .main {
+  position: relative;
+  top: 70px;
+  left: 300px;
+}

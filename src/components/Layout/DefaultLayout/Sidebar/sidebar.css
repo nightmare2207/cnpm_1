@@ -1,0 +1,143 @@
+:root {
+  --blue: #2a2185;
+  --white: #fff;
+  --gray: #f5f5f5;
+  --black1: #222;
+  --black2: #999;
+}
+
+#sidebar {
+  position: fixed;
+  width: 280px;
+  height: 100%;
+  background: linear-gradient(45deg, #0d0d0d, #1a1a1a, #0a2a42);
+  transition: all ease 0.5s;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all ease 0.3s;
+}
+
+#sidebar .sidebar-title {
+  width: 100%;
+  margin: 8px 0;
+}
+
+#sidebar .sidebar-title a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+}
+
+#sidebar .sidebar-title a .logo-app {
+  width: 40px;
+  object-fit: cover;
+  margin-right: 8px;
+  animation: event 8s linear infinite;
+}
+
+@keyframes event {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+#sidebar .sidebar-title a h1 {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--white);
+  text-transform: uppercase;
+}
+
+#sidebar .sidebar-title:hover .logo-app {
+  animation: event 1s linear infinite;
+}
+
+#sidebar .navigation .nav-title {
+  margin-top: 10px;
+  color: var(--white);
+  pointer-events: none;
+}
+
+#sidebar .navigation .nav-list {
+  list-style: none;
+  padding-left: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border-top: 2px solid #999;
+}
+
+#sidebar .navigation .nav-list .nav-item {
+  margin: 0 10px;
+  border-radius: 50px;
+  border: 2px solid transparent;
+  height: 50px;
+}
+
+#sidebar .navigation .nav-list .nav-item:first-child {
+  margin-top: 15px;
+}
+
+#sidebar .navigation .nav-list a {
+  color: var(--white);
+  text-decoration: none;
+  display: flex;
+  height: 100%;
+  justify-content: left;
+  padding: 0 10px;
+  align-items: center;
+  background: transparent;
+  gap: 4px;
+}
+
+#sidebar .navigation .nav-list a .nav-icon {
+  font-size: 28px;
+}
+
+#sidebar .navigation .nav-list a .nav-item-title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+#sidebar .navigation .nav-list .nav-item.selected,
+#sidebar .navigation .nav-list .nav-item:hover {
+  background-color: rgba(123, 118, 118, 0.2);
+  box-shadow: 0 0 20px #0ef;
+  border-color: #0ef;
+}
+
+#sidebar
+  .navigation
+  .nav-list
+  .nav-item.selected
+  a
+  #sidebar
+  .navigation
+  .nav-list
+  .nav-item:hover
+  a {
+  color: #999;
+}
+
+#sidebar.scale-min {
+  width: 70px;
+}
+
+#sidebar.scale-min .sidebar-title a h1,
+#sidebar.scale-min .navigation .nav-title,
+#sidebar.scale-min .navigation .nav-list a .nav-item-title {
+  display: none;
+}
+
+#sidebar.scale-min .navigation .nav-list .nav-item {
+  border-radius: 50%;
+}
+
+#sidebar.scale-min .navigation .nav-list a {
+  justify-content: center;
+}

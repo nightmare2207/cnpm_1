@@ -1,11 +1,24 @@
 .container {
-  width: 100%;
-  overflow-x: hidden;
-  overflow-y: scroll;
+  position: relative;
+  overflow-y: auto;
+  height: 100vh;
+  background-color: transparent;
+  right: 0;
+  left: 0;
 }
 
 .container .main {
   position: relative;
-  top: 70px;
-  left: 300px;
+  top: 57px;
+  float: right;
+  width: calc(100% - 280px);
+  min-height: 100vh;
+  overflow-y: auto;
+  background-color: red;
+  z-index: -1;
+  transition: all ease 0.3s;
+}
+
+.container .main.active {
+  width: calc(100% - 70px);
 }

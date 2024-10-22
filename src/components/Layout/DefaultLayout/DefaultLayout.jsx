@@ -17,7 +17,7 @@ function DefaultLayout({ items = [], onLogout }) {
         handleLogout={onLogout}
       />
       <Sidebar items={items} isMenuActive={isMenuActive} />
-      <div className="main">
+      <div className={isMenuActive ? "main active" : "main"}>
         <Outlet />
       </div>
     </div>

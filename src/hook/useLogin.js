@@ -1,12 +1,15 @@
 import { useState } from "react";
 import Swal from "sweetalert2";
 import { AccountStudent, AccountTeacher } from "../data";
+import { useNavigate } from "react-router-dom";
 
 function useLogin() {
   const [account, setAccount] = useState({
     userName: "",
     passWord: "",
   });
+  const navigate = useNavigate();
+
   function checkLogin(account, checkS) {
     const isStudentAccount = AccountStudent.some((student) => {
       return (
@@ -33,16 +36,20 @@ function useLogin() {
     }
     return false;
   }
+
   function handleClick(event, checkL, checkS) {
     event.preventDefault();
     const isLogin = checkLogin(account, checkS);
     checkL(isLogin);
+
     if (isLogin) {
       Swal.fire({
         title: "Good job!",
         text: "You logged in successfully!",
         icon: "success",
       });
+
+      navigate("/");
     } else {
       Swal.fire({
         title: "Error!",

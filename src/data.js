@@ -8,7 +8,7 @@ const AccountStudent = [
 const AccountTeacher = [
   {
     userName: "admin2",
-    passWord: "123",
+    passWord: "1234",
   },
 ];
 

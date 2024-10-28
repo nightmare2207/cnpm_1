@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { AccountStudent, AccountTeacher } from "../data";
 import { useNavigate } from "react-router-dom";
@@ -9,7 +9,6 @@ function useLogin() {
     passWord: "",
   });
   const navigate = useNavigate();
-
   function checkLogin(account, checkS) {
     const isStudentAccount = AccountStudent.some((student) => {
       return (

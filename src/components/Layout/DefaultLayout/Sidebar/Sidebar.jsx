@@ -10,7 +10,7 @@ function Sidebar({ items, isMenuActive }) {
   }
   return (
     <aside id="sidebar" className={isMenuActive ? "scale-min" : ""}>
-      <div className="sidebar-title">
+      <div className="sidebar-title" onClick={() => handleClick("dashboard")}>
         <Link to={"/"}>
           <img src={logo} alt="logo" className="logo-app" />
           <h1>Quản lý sinh viên</h1>
@@ -27,7 +27,7 @@ function Sidebar({ items, isMenuActive }) {
           >
             <Link to={"/"}>
               <MdDashboard className="nav-icon" />
-              <span className="nav-item-title">Dashboard</span>
+              <span className="nav-item-title">Trang chủ</span>
             </Link>
           </li>
           {items && items.length > 0 ? (

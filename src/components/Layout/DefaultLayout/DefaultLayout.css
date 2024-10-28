@@ -9,16 +9,25 @@
 
 .container .main {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
   top: 57px;
   float: right;
   width: calc(100% - 280px);
   min-height: 100vh;
   overflow-y: auto;
-  background-color: red;
-  z-index: -1;
+  background-color: transparent;
   transition: all ease 0.3s;
+  z-index: 1;
 }
 
 .container .main.active {
   width: calc(100% - 70px);
+}
+
+.container .main .loading {
+  font-size: 30px;
+  font-weight: bold;
 }

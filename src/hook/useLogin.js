@@ -1,62 +1,39 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Swal from "sweetalert2";
-import { AccountStudent, AccountTeacher } from "../data";
 import { useNavigate } from "react-router-dom";
+import { authenticateUser } from "../auth/api";
 
 function useLogin() {
-  const [account, setAccount] = useState({
-    userName: "",
-    passWord: "",
-  });
+  const [account, setAccount] = useState({ userName: "", passWord: "" });
   const navigate = useNavigate();
-  function checkLogin(account, checkS) {
-    const isStudentAccount = AccountStudent.some((student) => {
-      return (
-        student.userName === account.userName &&
-        student.passWord === account.passWord
-      );
-    });
 
-    if (isStudentAccount) {
-      checkS(true);
-      return true;
+  const checkLogin = async (account) => {
+    try {
+      const data = await authenticateUser(account);
+      return { isAuthenticated: data.isAuthenticated, userType: data.userType };
+    } catch (error) {
+      return { isAuthenticated: false, userType: null };
     }
+  };
 
-    const isTeacherAccount = AccountTeacher.some((teacher) => {
-      return (
-        teacher.userName === account.userName &&
-        teacher.passWord === account.passWord
-      );
-    });
-
-    if (isTeacherAccount) {
-      checkS(false);
-      return true;
-    }
-    return false;
-  }
-
-  function handleClick(event, checkL, checkS) {
+  const handleClick = async (event, checkL, checkS) => {
     event.preventDefault();
-    const isLogin = checkLogin(account, checkS);
-    checkL(isLogin);
+    const { isAuthenticated, userType } = await checkLogin(account);
+    checkL(isAuthenticated);
+    checkS(userType === "student");
 
-    if (isLogin) {
-      Swal.fire({
-        title: "Good job!",
-        text: "You logged in successfully!",
-        icon: "success",
-      });
+    Swal.fire({
+      title: isAuthenticated ? "Good job!" : "Error!",
+      text: isAuthenticated
+        ? "You logged in successfully!"
+        : "Incorrect username or password!",
+      icon: isAuthenticated ? "success" : "error",
+    });
 
+    if (isAuthenticated) {
       navigate("/");
-    } else {
-      Swal.fire({
-        title: "Error!",
-        text: "Incorrect username or password!",
-        icon: "error",
-      });
     }
-  }
+  };
 
   return {
     account,

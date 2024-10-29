@@ -8,7 +8,6 @@ import { StudentRoutes, TeacherRoutes } from "../routes/index";
 function RenderApp() {
   const [isLogin, setIsLogin] = useState(false);
   const [isStudent, setIsStudent] = useState(false);
-  console.log(isLogin);
   function handleLogout() {
     setIsLogin(false);
     setIsStudent(false);
@@ -19,6 +18,7 @@ function RenderApp() {
   const PublicRoute = ({ children }) => {
     return isLogin ? <Navigate to="/" /> : children;
   };
+
   return (
     <>
       <Routes>

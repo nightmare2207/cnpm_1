@@ -1,7 +1,7 @@
 import React from "react";
 import useLogin from "../../hook/useLogin";
 import LoginForm from "./LoginForm";
-function Login({ checkLogin, checkStudent }) {
+function Login({ checkLogin }) {
   const { account, setAccount, handleClick } = useLogin();
   return (
     <LoginForm
@@ -9,7 +9,6 @@ function Login({ checkLogin, checkStudent }) {
       setAccount={setAccount}
       handleClick={handleClick}
       checkLogin={checkLogin}
-      checkStudent={checkStudent}
     />
   );
 }

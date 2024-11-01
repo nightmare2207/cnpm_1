@@ -2,8 +2,7 @@ import { useState } from "react";
 import logo from "../../../assets/img/logo.png";
 import "./sidebar.css";
 import { Link } from "react-router-dom";
-import { MdDashboard } from "react-icons/md";
-function Sidebar({ items, isMenuActive }) {
+function Sidebar({ items = [], isMenuActive }) {
   const [isSelected, setIsSelected] = useState("dashboard");
   function handleClick(change) {
     setIsSelected(change);
@@ -19,18 +18,7 @@ function Sidebar({ items, isMenuActive }) {
       <div className="navigation">
         <h2 className="nav-title">navigation</h2>
         <ul className="nav-list">
-          <li
-            className={
-              isSelected === "dashboard" ? "nav-item selected" : "nav-item"
-            }
-            onClick={() => handleClick("dashboard")}
-          >
-            <Link to={"/"}>
-              <MdDashboard className="nav-icon" />
-              <span className="nav-item-title">Trang chủ</span>
-            </Link>
-          </li>
-          {items && items.length > 0 ? (
+          {items.length > 0 ? (
             items.map((item, index) => (
               <li
                 key={index}

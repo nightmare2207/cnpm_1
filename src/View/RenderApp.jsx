@@ -1,16 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Route, Routes, Navigate, Outlet } from "react-router-dom";
 import DefaultLayout from "../components/Layout/DefaultLayout/DefaultLayout";
 import Login from "../components/loginForm/Login";
-import Home from "../pages/Home";
-import { StudentRoutes, TeacherRoutes } from "../routes/index";
+import { StudentRoutes, TeacherRoutes, AdminRoutes } from "../routes/index";
 
 function RenderApp() {
   const [isLogin, setIsLogin] = useState(false);
-  const [isStudent, setIsStudent] = useState(false);
+  const [UserRouting, setUserRouting] = useState([]);
   function handleLogout() {
     setIsLogin(false);
-    setIsStudent(false);
+    localStorage.clear();
   }
   const ProtectedRoute = ({ children }) => {
     return isLogin ? children : <Navigate to="/login" />;
@@ -18,7 +17,23 @@ function RenderApp() {
   const PublicRoute = ({ children }) => {
     return isLogin ? <Navigate to="/" /> : children;
   };
-
+  useEffect(() => {
+    const userType = localStorage.getItem("userType");
+    switch (userType) {
+      case "student":
+        setUserRouting(StudentRoutes);
+        break;
+      case "teacher":
+        setUserRouting(TeacherRoutes);
+        break;
+      case "admin":
+        setUserRouting(AdminRoutes);
+        break;
+      default:
+        setUserRouting([]);
+        break;
+    }
+  }, [isLogin]);
   return (
     <>
       <Routes>
@@ -26,7 +41,7 @@ function RenderApp() {
           path="/login"
           element={
             <PublicRoute>
-              <Login checkLogin={setIsLogin} checkStudent={setIsStudent} />
+              <Login checkLogin={setIsLogin} />
             </PublicRoute>
           }
         />
@@ -34,15 +49,11 @@ function RenderApp() {
           path="/"
           element={
             <ProtectedRoute>
-              <DefaultLayout
-                items={isStudent ? StudentRoutes : TeacherRoutes}
-                onLogout={handleLogout}
-              />
+              <DefaultLayout items={UserRouting} onLogout={handleLogout} />
             </ProtectedRoute>
           }
         >
-          <Route index element={<Home />} />
-          {StudentRoutes.concat(TeacherRoutes).map((item, index) => (
+          {UserRouting.map((item, index) => (
             <Route key={index} path={item.path} element={item.element} />
           ))}
         </Route>

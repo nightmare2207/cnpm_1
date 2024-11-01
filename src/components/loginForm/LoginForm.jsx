@@ -2,13 +2,7 @@ import React from "react";
 import { FaUser, FaLock } from "react-icons/fa";
 import "./Login.css";
 
-function LoginForm({
-  account,
-  setAccount,
-  handleClick,
-  checkLogin,
-  checkStudent,
-}) {
+function LoginForm({ account, setAccount, handleClick, checkLogin }) {
   return (
     <div className="modal-overplay">
       <div className="wrapper">
@@ -54,7 +48,7 @@ function LoginForm({
           <button
             type="submit"
             className="login-btn"
-            onClick={(event) => handleClick(event, checkLogin, checkStudent)}
+            onClick={(event) => handleClick(event, checkLogin)}
           >
             Login
           </button>

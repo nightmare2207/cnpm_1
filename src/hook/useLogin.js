@@ -1,12 +1,9 @@
 import { useState } from "react";
 import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
 import { authenticateUser } from "../auth/api";
 
 function useLogin() {
   const [account, setAccount] = useState({ userName: "", passWord: "" });
-  const navigate = useNavigate();
-
   const checkLogin = async (account) => {
     try {
       const data = await authenticateUser(account);
@@ -16,12 +13,14 @@ function useLogin() {
     }
   };
 
-  const handleClick = async (event, checkL, checkS) => {
+  const handleClick = async (event, checkL) => {
     event.preventDefault();
     const { isAuthenticated, userType } = await checkLogin(account);
-    checkL(isAuthenticated);
-    checkS(userType === "student");
-
+    if (isAuthenticated) {
+      localStorage.setItem("userType", userType);
+      localStorage.setItem("isAuthenticated", isAuthenticated);
+      checkL(isAuthenticated);
+    }
     Swal.fire({
       title: isAuthenticated ? "Good job!" : "Error!",
       text: isAuthenticated
@@ -29,10 +28,6 @@ function useLogin() {
         : "Incorrect username or password!",
       icon: isAuthenticated ? "success" : "error",
     });
-
-    if (isAuthenticated) {
-      navigate("/");
-    }
   };
 
   return {

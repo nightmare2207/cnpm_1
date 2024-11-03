@@ -9,14 +9,7 @@ function Sidebar({ items = [], isMenuActive }) {
   }
   return (
     <aside id="sidebar" className={isMenuActive ? "scale-min" : ""}>
-      <div className="sidebar-title" onClick={() => handleClick("dashboard")}>
-        <Link to={"/"}>
-          <img src={logo} alt="logo" className="logo-app" />
-          <h1>Quản lý sinh viên</h1>
-        </Link>
-      </div>
       <div className="navigation">
-        <h2 className="nav-title">navigation</h2>
         <ul className="nav-list">
           {items.length > 0 ? (
             items.map((item, index) => (

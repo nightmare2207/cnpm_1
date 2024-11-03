@@ -1,8 +1,8 @@
 header {
   position: fixed;
-  width: calc(100% - 280px);
+  width: calc(100%);
   right: 0;
-  height: 57px;
+  height: 58px;
   background: linear-gradient(-45deg, #0d0d0d, #1a1a1a, #0a2a42);
   display: flex;
   justify-content: space-between;
@@ -11,15 +11,59 @@ header {
   z-index: 2;
 }
 
-header.active-header {
-  width: calc(100% - 70px);
+header .logo-selectMenu-app {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  justify-content: space-around;
+  margin-left: 10px;
+}
+
+header .sidebar-title {
+  width: 100%;
+  margin: 8px 0;
+}
+
+header .sidebar-title a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+}
+
+header .sidebar-title a .logo-app {
+  width: 40px;
+  object-fit: cover;
+  margin-right: 8px;
+  animation: event 8s linear infinite;
+}
+
+@keyframes event {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+header .sidebar-title a h1 {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--white);
+  text-transform: uppercase;
+  margin-left: 10px;
+}
+
+header .sidebar-title:hover .logo-app {
+  animation: event 1s linear infinite;
 }
 
 header .menu-icon {
-  font-size: 30px;
+  font-size: 40px;
   font-weight: 500;
-  margin-left: 10px;
   border-radius: 50%;
+  width: 50px;
   border: 1px solid transparent;
   padding: 4px;
   color: #fff;

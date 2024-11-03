@@ -16,6 +16,7 @@ function useLogin() {
   const handleClick = async (event, checkL) => {
     event.preventDefault();
     const { isAuthenticated, userType } = await checkLogin(account);
+    console.log(1);
     if (isAuthenticated) {
       localStorage.setItem("userType", userType);
       localStorage.setItem("isAuthenticated", isAuthenticated);

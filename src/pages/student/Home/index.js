@@ -40,8 +40,9 @@ function Home() {
         setIsLoading(false);
       }
     };
-
-    fetchUserData();
+    setTimeout(() => {
+      fetchUserData();
+    }, 1000);
   }, []);
 
   const data = Object.entries(scores)

@@ -13,29 +13,23 @@ function useLogin() {
     }
   };
 
-  const handleClick = async (event, checkL) => {
+  const handleClick = (event, checkLogin) => {
     event.preventDefault();
-    const { isAuthenticated, userType } = await checkLogin(account);
-    console.log(1);
-    if (isAuthenticated) {
-      localStorage.setItem("userType", userType);
-      localStorage.setItem("isAuthenticated", isAuthenticated);
-      checkL(isAuthenticated);
+    if (account.userName === "admin" && account.passWord === "admin") {
+      localStorage.setItem("userType", "admin");
+      checkLogin(true);
+    } else if (account.userName === "student" && account.passWord === "student") {
+      localStorage.setItem("userType", "student");
+      checkLogin(true);
+    } else if (account.userName === "teacher" && account.passWord === "teacher") {
+      localStorage.setItem("userType", "teacher");
+      checkLogin(true);
+    } else {
+      alert("Tên đăng nhập hoặc mật khẩu không chính xác");
     }
-    Swal.fire({
-      title: isAuthenticated ? "Good job!" : "Error!",
-      text: isAuthenticated
-        ? "You logged in successfully!"
-        : "Incorrect username or password!",
-      icon: isAuthenticated ? "success" : "error",
-    });
   };
 
-  return {
-    account,
-    setAccount,
-    handleClick,
-  };
+  return { account, setAccount, handleClick };
 }
 
 export default useLogin;

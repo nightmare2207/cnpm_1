@@ -4,6 +4,7 @@ import { MdDashboard } from "react-icons/md";
 import * as PagesStudent from "../pages/student/index";
 import * as PagesTeacher from "../pages/teacher/index";
 import * as PagesAdmin from "../pages/admin/index";
+
 const StudentRoutes = [
   {
     path: "/",

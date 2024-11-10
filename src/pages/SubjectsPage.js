@@ -1,11 +1,29 @@
 // src/pages/SubjectsPage.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-function SubjectsPage({ subjects, onAdd, onEdit, onDelete }) {
+function SubjectsPage({ api }) {
+    const [subjects, setSubjects] = useState([]);
     const [newSubject, setNewSubject] = useState('');
-    const handleAdd = () => {
-        onAdd(newSubject);
+
+    useEffect(() => {
+        const fetchSubjects = async () => {
+            const data = await api.getSubjects();
+            setSubjects(data);
+        };
+        fetchSubjects();
+    }, [api]);
+
+    const handleAdd = async () => {
+        await api.addSubject(newSubject);
         setNewSubject('');
+        const updatedSubjects = await api.getSubjects();
+        setSubjects(updatedSubjects);
+    };
+
+    const handleDelete = async (subjectId) => {
+        await api.deleteSubject(subjectId);
+        const updatedSubjects = await api.getSubjects();
+        setSubjects(updatedSubjects);
     };
 
     return (
@@ -30,8 +48,7 @@ function SubjectsPage({ subjects, onAdd, onEdit, onDelete }) {
                         <tr key={subject.id}>
                             <td>{subject.name}</td>
                             <td>
-                                <button onClick={() => onEdit(subject.id)}>Sửa</button>
-                                <button onClick={() => onDelete(subject.id)}>Xóa</button>
+                                <button onClick={() => handleDelete(subject.id)}>Xóa</button>
                             </td>
                         </tr>
                     ))}

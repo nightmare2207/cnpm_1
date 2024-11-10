@@ -1,7 +1,9 @@
+// src/RenderApp.jsx
 import React, { useEffect, useState } from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
 import DefaultLayout from "../components/Layout/DefaultLayout/DefaultLayout";
 import Login from "../components/loginForm/Login";
+import RegisterPage from "../pages/RegisterPage";
 import { StudentRoutes, TeacherRoutes, AdminRoutes } from "../routes/index";
 
 function RenderApp() {
@@ -23,6 +25,8 @@ function RenderApp() {
 
   useEffect(() => {
     const userType = localStorage.getItem("userType");
+    setIsLogin(!!userType); // Check if userType exists to set login state
+
     switch (userType) {
       case "student":
         setUserRouting(StudentRoutes);
@@ -46,6 +50,14 @@ function RenderApp() {
         element={
           <PublicRoute>
             <Login checkLogin={setIsLogin} />
+          </PublicRoute>
+        }
+      />
+      <Route
+        path="/register"
+        element={
+          <PublicRoute>
+            <RegisterPage />
           </PublicRoute>
         }
       />

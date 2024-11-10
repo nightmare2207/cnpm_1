@@ -1,7 +1,18 @@
 // src/pages/DashboardPage.js
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-function DashboardPage({ summary }) {
+function DashboardPage({ api }) {
+    const [summary, setSummary] = useState({ teachers: 0, students: 0, subjects: 0 });
+
+    useEffect(() => {
+        // Fetch summary data from API
+        const fetchSummary = async () => {
+            const data = await api.getSummary();
+            setSummary(data);
+        };
+        fetchSummary();
+    }, [api]);
+
     return (
         <div className="dashboard-page">
             <h2>Trang Chủ</h2>
@@ -24,4 +35,3 @@ function DashboardPage({ summary }) {
 }
 
 export default DashboardPage;
-

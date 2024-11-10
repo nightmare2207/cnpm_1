@@ -1,13 +1,15 @@
 // src/pages/LoginPage.js
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function LoginPage({ onLogin }) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        onLogin(username, password); // Gọi hàm đăng nhập từ props
+        onLogin(username, password);
     };
 
     return (
@@ -28,6 +30,7 @@ function LoginPage({ onLogin }) {
                 />
                 <button type="submit">Đăng Nhập</button>
             </form>
+            <button onClick={() => navigate('/register')}>Sign Up</button>
         </div>
     );
 }

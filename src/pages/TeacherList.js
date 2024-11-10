@@ -1,7 +1,17 @@
 // src/pages/TeacherList.js
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-function TeacherList({ teachers }) {
+function TeacherList({ api }) {
+    const [teachers, setTeachers] = useState([]);
+
+    useEffect(() => {
+        const fetchTeachers = async () => {
+            const data = await api.getTeachers();
+            setTeachers(data);
+        };
+        fetchTeachers();
+    }, [api]);
+
     return (
         <div className="teacher-list">
             <h2>Danh Sách Giáo Viên</h2>

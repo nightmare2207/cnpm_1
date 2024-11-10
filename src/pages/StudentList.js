@@ -1,7 +1,17 @@
 // src/pages/StudentList.js
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-function StudentList({ students }) {
+function StudentList({ api }) {
+    const [students, setStudents] = useState([]);
+
+    useEffect(() => {
+        const fetchStudents = async () => {
+            const data = await api.getStudents();
+            setStudents(data);
+        };
+        fetchStudents();
+    }, [api]);
+
     return (
         <div className="student-list">
             <h2>Danh Sách Sinh Viên</h2>
